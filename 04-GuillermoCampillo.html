@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Calendario</title>
+    <style type="text/css">
+       table, th, .dias{
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+      /*   th,td{
+            text-align: center;
+        }
+        .semana{
+            background-color: #4CAF50;
+            color: white;
+            padding: 5px;
+        }
+        .dias, #hoy{
+            background-color:#fff2cc;
+        }
+        #hoy{
+            color:red;
+        }*/
+        .blanco{
+            background-color:blue;
+        }
+    </style>
+</head>
+<body>
+    <script type="text/javascript">
+        function blanco() {
+            document.write("<td class='blanco'></td>");
+        }
+        function escribeSemana(){
+            semana=["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"];
+            document.write("<tr>");
+                for(var i=0;i<semana.length;i++){
+                document.write("<th class='semana'>"+ semana[i] +"</th>");
+                }
+            document.write("</tr>");
+        }
+        function escribeDias(){
+            if(aux.getDay()<=i){
+                if(auxDia>maxMes){
+                    blanco();
+                }
+                else{
+                    if(auxDia!=hoy.getDate()){
+                        document.write("<td class='dias'>"+auxDia+"</td>");
+                        auxDia++;
+                    }
+                    else{
+						document.write("<th id='hoy'>"+auxDia+"</th>");
+                        auxDia++;
+                    } 
+                }
+            }
+            else{
+                blanco();
+            }
+        }
+        var hoy = new Date();
+        
+        var semana = new Array();
+        semana=["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];
+        
+        var meses=new Array();
+        meses=[31,28,31,30,31,30,31,31,30,31,30,31]; 
+        if ((hoy.getFullYear()%4==0)&&((hoy.getFullYear()%100!=0)||(hoy.getFullYear()%400==0))){ 
+            meses[1]=29; 
+        }
+         
+        document.write("<table align='center'>");
+        document.write("<tr><th colspan='7'>"+semana[hoy.getDay()]+" "+hoy.getDate()+"/"+(hoy.getMonth()+1)+"/"+hoy.getFullYear()+"</th></tr>");
+        
+        escribeSemana();
+        
+        var maxMes=meses[hoy.getMonth()];
+        
+        var aux=new Date(hoy);
+        aux.setDate(1);
+        var auxDia=aux.getDate();
+        
+        var contSemana=0;
+        
+        for(var i=1;i<43;i++){
+            if(contSemana==0){
+                document.write("<tr>");
+            }
+            if(contSemana==7){
+                document.write("</tr>");
+                contSemana=0;
+            }
+            escribeDias();
+            contSemana++;
+        }
+        document.write("</table>");
+    </script>
+</body>
+</html>
